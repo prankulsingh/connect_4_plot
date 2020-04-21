@@ -1,9 +1,10 @@
 import logging
+import os
+
 from credentials import token
 import connect_4_plot
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram import Animation
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -33,7 +34,6 @@ def help(update, context):
     update.message.reply_text('Help will be added soon. I am lazy.')
 
 
-
 def make_move(update, context):
     if update.message.reply_to_message is None or update.message.reply_to_message == "":
         update.message.reply_text("Please reply to a game message that I sent, otherwise how will I know previous "
@@ -60,7 +60,7 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater(token, use_context=True)
+    updater = Updater(os.getenv("TOKEN"), use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
