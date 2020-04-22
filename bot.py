@@ -38,14 +38,14 @@ def help(update, context):
     update.message.reply_text('If you don\'t know how to play the game then refer this: '
                               'https://www.wikihow.com/Play-Connect-4')
     update.message.reply_text('Now that you know how to play, use /new_game command to start a new game.')
-    update.message.reply_text('Then just reply on my message with a number between 1-7 to put your coin in respective '
+    update.message.reply_text('Then just reply to my message with a number between 1-7 to put your coin in respective '
                               'slot/column')
     update.message.reply_text('For example, if you select 2, then your coin (either ' + constants.player_1 + ' or ' +
-                              constants.player_2 + 'will be put in that slot/column.\n\n1⃣2⃣3⃣4⃣5⃣6⃣7⃣\n⚪⚪⚪⚪⚪⚪⚪\n'
+                              constants.player_2 + ' will be put in that slot/column.\n\n1⃣2⃣3⃣4⃣5⃣6⃣7⃣\n⚪⚪⚪⚪⚪⚪⚪\n'
                               '⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪🔵⚪⚪⚪⚪⚪')
     update.message.reply_text('Just keep track of whose turn is it and play by replying to my messages.')
-    update.message.reply_text('Now you\'re sorted if you want to play this game with someone! But what if you want to '
-                              'play with someone whose not with you?\nDon\'t  worry, I\' got your back! Just add me '
+    update.message.reply_text('Now you should be ready to play this game with someone!\nBut what if you want to '
+                              'play with someone whose not with you?\nDon\'t  worry, I\'ve got your back! Just add me '
                               'and that person in a group and you\'ll be good to go!')
 
 
