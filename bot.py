@@ -1,7 +1,5 @@
 import logging
 import os
-
-from credentials import token
 import connect_4_plot
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -60,7 +58,24 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater(os.getenv("TOKEN"), use_context=True)
+
+    token = ""
+    try:
+        import credentials
+        token = credentials.token
+    except Exception as e:
+        logger.error("Unable to get token from credentials file: " + str(e))
+        try:
+            token = os.getenv("TOKEN")
+        except Exception as e:
+            logger.error("Unable to get token from OS env vars: " + str(e))
+            exit(1)
+
+    if token is None or token == "":
+        logger.error("Unable to get token!")
+        exit(1)
+
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
