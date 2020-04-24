@@ -2,6 +2,7 @@ import logging
 import os
 import connect_4_plot
 import constants
+from datetime import datetime
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -50,10 +51,20 @@ def help(update, context):
 
 
 def make_move(update, context):
-    if update.message.reply_to_message is None or update.message.reply_to_message == "":
-        update.message.reply_text("Please reply to a game message that I sent, otherwise how will I know previous "
-                                  "state of game?")
-    else:
+    try:
+        log_data = {
+            'datetime': datetime.now(),
+            'first_name': update.message.from_user.first_name,
+            'last_name': update.message.from_user.last_name,
+            'is_bot': update.message.from_user.is_bot,
+            'username': update.message.from_user.username,
+            'chat_type': update.message.chat.type,
+            'chat_title': update.message.chat.title
+        }
+        print('log', log_data)
+    except Exception as e:
+        logger.error('Could not log: ' + str(e))
+    if update.message.reply_to_message.from_user.username == "test_611_bot":
         try:
             update.message.reply_text(connect_4_plot.make_move(update.message.reply_to_message.text, update.message.text))
         except Exception as e:
