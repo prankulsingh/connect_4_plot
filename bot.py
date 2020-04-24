@@ -29,6 +29,11 @@ def echo(update, context):
     update.message.reply_text(update.message.text)
 
 
+def stats(update, context):
+    """Echo the user message."""
+    update.message.reply_text(update.message.text)
+
+
 def new_game(update, context):
     new_game_board = "🔵's turn!\n\n1⃣2⃣3⃣4⃣5⃣6⃣7⃣\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪\n⚪⚪⚪⚪⚪⚪⚪"
     update.message.reply_text(new_game_board)
@@ -64,7 +69,7 @@ def make_move(update, context):
         print('log', log_data)
     except Exception as e:
         logger.error('Could not log: ' + str(e))
-    if update.message.reply_to_message.from_user.username == "test_611_bot":
+    if update.message.reply_to_message is not None and update.message.reply_to_message.from_user.username == "test_611_bot":
         try:
             update.message.reply_text(connect_4_plot.make_move(update.message.reply_to_message.text, update.message.text))
         except Exception as e:
@@ -112,6 +117,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("new_game", new_game))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("stats", stats))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, make_move))
